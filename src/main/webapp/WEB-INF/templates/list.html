@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{{ i18n("messages", "titleList") }}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+        <link href="../../resources/css/create.css" rel="stylesheet"/>
+        <script id="" type="text/javascript">
+            var i18n = {
+                error: "{{ i18n('messages', 'error') }}",
+                reqFail: "{{ i18n('messages', 'reqFail') }}"
+            }
+        </script>
+    </head>
+    <body>
+        <h2>{{ i18n("messages", "titleList") }}</h2>
+
+        <form action="/contacts" method="get">
+            <div class="form-group">
+                <label for="search">{{ i18n("messages", "searchByName") }}</label>
+                <input name="name" type="text" class="form-control" id="search" placeholder="Введите имя"/>
+                <button type="submit" id="searchByName" class="btn btn-primary">{{ i18n("messages", "search") }}</button>
+                <button type="reset" class="btn btn-primary">{{ i18n("messages", "searchAll") }}</button>
+                <a class="btn btn-primary" href="/contacts/create">{{ i18n("messages", "addContact") }}</a>
+            </div>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>{{ i18n("messages", "contactName") }}</td>
+                    <td>{{ i18n("messages", "contactDescription") }}</td>
+                    <td>{{ i18n("messages", "contactPhone") }}</td>
+                    <td></td><td></td>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                {% for contact in contacts %}
+                    <tr>
+                        <td><img class="rounded-circle" src="{% if contact.image is null %} https://beg.moscow/wp-content/uploads/2018/08/Avatar.png {% else %} {{contact.image}} {% endif %}" width="100" height="100"/></td>
+                        <td class="font">{{ contact.name }}</td>
+                        <td class="font">{{ contact.description }}</td>
+                        <td class="font">{{ contact.phone }}</td>
+                        <td class="font">
+                            <a href="/contacts/{{contact.id}}/edit" id="edit" class="btn btn-primary">
+                                {{ i18n("messages", "edit") }}
+                            </a>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" id="delete" onclick="deleteContactRequest('/contacts/{{ contact.id }}/delete', this)">
+                                {{ i18n("messages", "delete") }}
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script src="../../resources/js/deleteContactRequest.js"></script>
+    </body>
+</html>

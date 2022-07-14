@@ -1,0 +1,15 @@
+.font {
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container-form {
+    margin-top: 25px;
+    margin-right: 50px;
+    margin-left: 50px;
+    background-color: aliceblue;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    padding: 10px;
+}
